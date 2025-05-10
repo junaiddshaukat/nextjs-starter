@@ -4,6 +4,9 @@ A modern Next.js starter template with authentication, database integration, and
 
 
 
+![image](https://github.com/user-attachments/assets/55cd742d-c129-4867-9aa1-baffb22d8da2)
+
+
 
 ## Features
 
