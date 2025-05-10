@@ -1,103 +1,137 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { useSession } from 'next-auth/react';
+import { UserProfileDropdown } from '@/components/ui/user-profile-dropdown';
+import { motion } from 'framer-motion';
+
+const features = [
+  { icon: '🔐', title: 'Authentication', desc: 'NextAuth.js with Google OAuth and credentials' },
+  { icon: '💾', title: 'Database', desc: 'MongoDB & Mongoose integration' },
+  { icon: '🎨', title: 'Modern UI', desc: 'Tailwind CSS & Shadcn UI components' },
+  { icon: '📧', title: 'Email', desc: 'Nodemailer for email verification & reset' },
+  { icon: '🛡️', title: 'Security', desc: 'Rate limiting, roles, protected routes' },
+  { icon: '⚡', title: 'TypeScript', desc: 'Full type safety throughout the stack' },
+];
+
+const testimonials = [
+  {
+    name: 'Jane Doe',
+    company: 'Acme Inc.',
+    quote: 'This template saved us weeks of development and looks amazing out of the box!'
+  },
+  {
+    name: 'John Smith',
+    company: 'StartupX',
+    quote: 'The best Next.js starter I have ever used. Super easy to customize.'
+  },
+];
+
+export default function LandingPage() {
+  const { data: session } = useSession();
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800">
+      <nav className="w-full px-4 py-4 flex justify-between items-center bg-gray-900/80 border-b border-gray-800 sticky top-0 z-50">
+        <div className="flex items-center gap-2">
+          <span className="text-2xl font-bold text-white">NextStarter</span>
+          <span className="ml-2 px-2 py-0.5 rounded bg-green-700 text-xs text-white font-semibold">Open Source & Free</span>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        <div className="flex items-center gap-4">
+          <Link href="/docs" className="text-gray-300 hover:text-white transition">Docs</Link>
+          <Link href="https://github.com/junaiddshaukat/nextjs-starter" target="_blank" className="text-gray-300 hover:text-white transition">GitHub</Link>
+          {session?.user ? (
+            <UserProfileDropdown user={{ name: session.user.name || '', email: session.user.email || '' }} />
+          ) : (
+            <>
+              <Link href="/auth/signin">
+                <Button variant="ghost" className="text-white hover:text-gray-300">Sign In</Button>
+              </Link>
+              <Link href="/auth/signup">
+                <Button className="bg-blue-600 hover:bg-blue-700">Sign Up</Button>
+              </Link>
+            </>
+          )}
+        </div>
+      </nav>
+      <header className="max-w-5xl mx-auto px-4 py-12 flex flex-col items-center text-center">
+        <motion.h1 initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="text-5xl md:text-6xl font-bold text-white mb-4">
+          Build SaaS Faster
+        </motion.h1>
+        <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.7 }} className="text-xl text-gray-300 mb-8 max-w-2xl">
+          A modern Next.js starter template with authentication, database, beautiful UI, and everything you need to launch your next SaaS or internal tool.
+        </motion.p>
+        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.7 }} className="flex flex-col md:flex-row gap-4 justify-center">
+          <Link href="/sig"><Button size="lg" className="bg-blue-600 hover:bg-blue-700">Get Started</Button></Link>
+          <Link href="/docs"><Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10">View Docs</Button></Link>
+        </motion.div>
+      </header>
+
+      <section className="max-w-5xl mx-auto px-4 py-16">
+        <h2 className="text-3xl font-bold text-white mb-8 text-center">Features</h2>
+        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.1 } } }} className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {features.map((f, i) => (
+            <motion.div key={f.title} variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }} transition={{ duration: 0.5 }}>
+              <FeatureCard icon={f.icon} title={f.title} desc={f.desc} />
+            </motion.div>
+          ))}
+        </motion.div>
+      </section>
+
+      <section className="max-w-4xl mx-auto px-4 py-16">
+        <h2 className="text-3xl font-bold text-white mb-8 text-center">What People Are Saying</h2>
+        <div className="grid md:grid-cols-2 gap-8">
+          {testimonials.map((t, i) => (
+            <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.2, duration: 0.6 }} className="bg-gray-800/50 rounded-lg p-6 border border-gray-700 shadow">
+              <div className="text-lg text-gray-200 mb-4">“{t.quote}”</div>
+              <div className="text-gray-400 font-semibold">- {t.name}, {t.company}</div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      <section id="pricing" className="max-w-2xl mx-auto px-4 py-16 text-center">
+        <h2 className="text-3xl font-bold text-white mb-4">Pricing</h2>
+        <p className="text-gray-300 mb-8">Free and open source. No payment required.</p>
+        <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="bg-gray-800 rounded-lg shadow-xl p-8 inline-block">
+          <div className="text-5xl font-bold text-white mb-2">$0</div>
+          <div className="text-gray-400 mb-6">Get the full template, docs, and community support.</div>
+          <Link href="https://github.com/junaiddshaukat/nextjs-starter" target="_blank">
+            <Button size="lg" className="bg-blue-600 hover:bg-blue-700 w-full">Star on GitHub</Button>
+          </Link>
+        </motion.div>
+      </section>
+
+      <section className="max-w-3xl mx-auto px-4 py-16">
+        <h2 className="text-3xl font-bold text-white mb-8 text-center">FAQ</h2>
+        <div className="space-y-6">
+          <FAQ q="Is this really free?" a="Yes! This template is open source and free for personal and commercial use." />
+          <FAQ q="What do I get after download?" a="You get access to the full template, docs, and updates." />
+          <FAQ q="Can I use this for client projects?" a="Yes! Your license allows unlimited use for personal and client projects." />
+          <FAQ q="Is there support?" a="Yes, you get community support and free updates." />
+        </div>
+      </section>
+
+      <footer className="text-center text-gray-500 py-8">&copy; {new Date().getFullYear()} NextStarter. Open source under the MIT License.</footer>
+    </div>
+  );
+}
+
+function FeatureCard({ icon, title, desc }: { icon: string; title: string; desc: string }) {
+  return (
+    <div className="p-6 rounded-lg bg-gray-800/50 border border-gray-700 hover:border-blue-500 transition-colors text-center">
+      <div className="text-4xl mb-4">{icon}</div>
+      <h3 className="text-xl font-semibold text-white mb-2">{title}</h3>
+      <p className="text-gray-400">{desc}</p>
+    </div>
+  );
+}
+
+function FAQ({ q, a }: { q: string; a: string }) {
+  return (
+    <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700">
+      <div className="font-semibold text-white mb-2">{q}</div>
+      <div className="text-gray-400">{a}</div>
     </div>
   );
 }

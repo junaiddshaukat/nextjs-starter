@@ -1,0 +1,30 @@
+// Centralized SEO and metadata config for the template
+
+export const SEO_CONFIG = {
+  siteName: 'Premium Next.js Dashboard',
+  defaultTitle: 'Premium Next.js Dashboard | Modern Auth & UI',
+  defaultDescription: 'A modern, secure, and beautiful Next.js dashboard template with authentication, user management, and premium UI.',
+  keywords: [
+    'Next.js dashboard',
+    'Next.js authentication',
+    'Next.js template',
+    'Premium dashboard',
+    'Modern UI',
+    'User management',
+    'Mongoose',
+    'MongoDB',
+    'Tailwind CSS',
+    'Shadcn UI',
+    'NextAuth',
+    'Nodemailer',
+    'SEO',
+  ],
+  author: 'Your Name',
+  authorUrl: 'https://yourdomain.com',
+  twitter: '@yourtwitter',
+  url: 'https://yourdomain.com',
+  ogImage: '/og-image.png',
+  favicon: '/favicon.ico',
+  appleIcon: '/apple-touch-icon.png',
+  manifest: '/site.webmanifest',
+}; 
